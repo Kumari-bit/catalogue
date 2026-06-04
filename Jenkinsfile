@@ -2,8 +2,8 @@ pipeline {
     agent  {
         label 'roboshop'
     }
-    // // environment { 
-    // //     COURSE = 'jenkins'
+    // environment { 
+    //     appversion = ''
     // }
     options {
         timeout(time: 30, unit: 'MINUTES') 
