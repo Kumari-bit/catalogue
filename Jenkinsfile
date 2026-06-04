@@ -2,9 +2,9 @@ pipeline {
     agent  {
         label 'roboshop'
     }
-    // environment { 
-    //     appversion = ''
-    // }
+    environment { 
+        appversion = ''
+    }
     options {
         timeout(time: 30, unit: 'MINUTES') 
         disableConcurrentBuilds()
@@ -18,18 +18,15 @@ pipeline {
     // }
     // Build
     stages {
-        stage('Build') {
+        stage('Read Package.json') {
             steps {
-                script{
-                    sh """
-                        echo "Hello Build"
-                        sleep 10
-                        env
-                    """
+                script {
+                    def packageJson = readJSON file: 'package.json'
+                    appVersion = packageJson.version
+                    echo "package version: $(appversion)"
                 }
             }
-        }
-    }
+        }        
     post { 
         always { 
             echo 'I will always say Hello again!'
